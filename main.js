@@ -1,0 +1,1 @@
+// JS to load content from Google Sheets (placeholder)

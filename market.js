@@ -1,0 +1,1 @@
+// JS to load artwork from Google Sheets (placeholder)

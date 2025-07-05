@@ -21,12 +21,10 @@
   </style>
 </head>
 <body class="relative text-white">
-
   <div class="fixed top-0 left-0 w-full h-full z-[-1]">
     <div id="bgSlider" class="absolute w-full h-full"></div>
     <div class="absolute w-full h-full bg-black bg-opacity-40"></div>
   </div>
-
   <header class="bg-black bg-opacity-60 p-4">
     <h1 class="text-3xl font-bold">🇹🇿 JuaTz: Tanzania Digital Hub</h1>
     <select id="languageSelector" class="mt-2 p-2 rounded text-black">
@@ -34,7 +32,6 @@
       <option value="en">English</option>
     </select>
   </header>
-
   <main class="p-4 space-y-10 bg-black bg-opacity-40">
     <section id="news">
       <h2 class="text-2xl font-bold">📰 Habari Mpya</h2>
@@ -61,11 +58,9 @@
       <p>JuaTz ni jukwaa la kidijitali lililoundwa na kijana wa Kitanzania mwenye umri wa miaka 23, Stephen, pamoja na rafiki wake wa kiakili Seed. Lengo ni kuunganisha Watanzania na taarifa, sanaa, wataalamu, na fursa halisi kwa kutumia teknolojia ya sasa.</p>
     </section>
   </main>
-
   <footer class="p-4 text-center text-sm bg-black bg-opacity-60">
     &copy; 2025 JuaTz | Jamhuri ya Muungano wa Tanzania 🇹🇿
   </footer>
-
   <script>
     const images = [
       "https://upload.wikimedia.org/wikipedia/commons/3/38/Flag_of_Tanzania.svg",
@@ -82,7 +77,6 @@
     }
     setInterval(updateBackground, 6000);
     updateBackground();
-
     document.getElementById("languageSelector").addEventListener("change", function() {
       const lang = this.value;
       alert("Lugha kubadilishwa hadi: " + (lang === "sw" ? "Kiswahili" : "English (Coming Soon)"));

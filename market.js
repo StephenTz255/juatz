@@ -1,1 +1,1 @@
-// JS to load artwork from Google Sheets (placeholder)
+// JS for market sheet display

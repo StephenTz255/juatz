@@ -1,1 +1,1 @@
-// JS to load content from Google Sheets (placeholder)
+// JS for loading news, jobs, experts

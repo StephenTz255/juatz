@@ -1,19 +1,56 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JuaTz Internal Chat</title>
-  <script type="module" src="chat.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JuaTz - Your Community Hub</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+  <script src="main.js" defer></script>
 </head>
-<body>
-  <h1>Welcome to JuaTz Internal Chat</h1>
-  <div>
-    <input type="text" id="nameInput" placeholder="Your Name" />
-    <input type="text" id="messageInput" placeholder="Type a message" />
-    <button onclick="sendMessage()">Send</button>
-  </div>
-  <div id="chatBox"></div>
+<body class="bg-gray-100">
+  <header class="bg-blue-600 text-white p-4">
+    <h1 class="text-2xl font-semibold">Welcome to JuaTz</h1>
+  </header>
+
+  <main class="p-4 space-y-8">
+    <section id="news-feed">
+      <h2 class="text-xl font-bold">📰 News Feed</h2>
+      <div id="news-content" class="space-y-2"></div>
+    </section>
+
+    <section id="job-opportunities">
+      <h2 class="text-xl font-bold">💼 Job Opportunities</h2>
+      <div id="job-listings" class="space-y-2"></div>
+    </section>
+
+    <section id="experts-directory">
+      <h2 class="text-xl font-bold">📚 Experts Directory</h2>
+      <div id="experts-list" class="space-y-2"></div>
+    </section>
+
+    <section id="web-library">
+      <h2 class="text-xl font-bold">🏙️ WebLibrary (Miji ya Tanzania)</h2>
+      <div id="towns-list" class="space-y-2"></div>
+    </section>
+
+    <section id="art-market">
+      <h2 class="text-xl font-bold">🎨 Tanzania Art Market</h2>
+      <div id="art-listings" class="space-y-2"></div>
+    </section>
+
+    <section id="real-time-chat">
+      <h2 class="text-xl font-bold">💬 Real-Time Chat System</h2>
+      <div id="chat-container"></div>
+    </section>
+
+    <section id="tushirikishe">
+      <h2 class="text-xl font-bold">🎙️ Tushirikishe – Teach & Tell</h2>
+      <div id="tushirikishe-content" class="space-y-2"></div>
+    </section>
+  </main>
+
+  <footer class="bg-blue-600 text-white p-4 text-center">
+    <p>© 2025 JuaTz. All rights reserved.</p>
+  </footer>
 </body>
 </html>

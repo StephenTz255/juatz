@@ -1,0 +1,1 @@
+// Firebase chat logic placeholder

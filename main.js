@@ -1,30 +1,34 @@
-// main.js
-async function fetchGoogleSheetData(sheetId) {
-    try {
-        const response = await fetch(`https://opensheet.elk.sh/${sheetId}`);
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return await response.json();
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        alert('Failed to load data. Please try again later.');
-    }
+
+// Load data from Google Sheets using OpenSheet API
+
+async function loadSheet(url, containerId, formatter) {
+  const res = await fetch(url);
+  const data = await res.json();
+  const container = document.getElementById(containerId);
+  container.innerHTML = "";
+  data.forEach(entry => {
+    container.innerHTML += formatter(entry);
+  });
 }
 
-async function loadNewsFeed() {
-    const newsData = await fetchGoogleSheetData('YOUR_NEWS_SHEET_ID');
-    const newsContent = document.getElementById('news-content');
-    if (newsData) {
-        newsData.forEach(news => {
-            const newsItem = document.createElement('div');
-            newsItem.innerHTML = `<h3>${news.title}</h3><p>${news.description}</p>`;
-            newsContent.appendChild(newsItem);
-        });
-    }
+function formatNews(item) {
+  return `<div class="mb-2"><h3 class="font-bold">${item.Title}</h3><p>${item.Description}</p></div>`;
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    loadNewsFeed();
-});
-￼Enter
+function formatJobs(item) {
+  return `<div class="mb-2"><strong>${item.Title}</strong> - ${item.Description} (${item.Deadline})</div>`;
+}
+
+function formatExperts(item) {
+  return `<div class="mb-2"><strong>${item.Name}</strong> - ${item.Profession} (${item.Contact})</div>`;
+}
+
+// URLs to your sheets
+const newsURL = "https://opensheet.elk.sh/1wYojlcwrcRbodePfm1I6u7yW8gVEnJYydKs5FbKWxuw/Sheet1";
+const jobsURL = "https://opensheet.elk.sh/1gSpsLMmNBployPFYvlrQB2K6cRpP0hvgi7d3jBP6KnY/Sheet1";
+const expertsURL = "https://opensheet.elk.sh/1XpsCfd_fv8IPjo2mxttnRYEpHk6UmTPjbvHM6uuqwSQ/Sheet1";
+
+// Load content
+loadSheet(newsURL, "newsContent", formatNews);
+loadSheet(jobsURL, "jobsContent", formatJobs);
+loadSheet(expertsURL, "expertsContent", formatExperts);

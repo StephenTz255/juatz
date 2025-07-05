@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JuaTz | Tanzania Digital Hub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="main.js"></script>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+    #bgSlider {
+      background-size: cover;
+      background-position: center;
+      transition: background-image 1.5s ease-in-out;
+    }
+  </style>
+</head>
+<body class="relative text-white">
+  <div class="fixed top-0 left-0 w-full h-full z-[-1]">
+    <div id="bgSlider" class="absolute w-full h-full"></div>
+    <div class="absolute w-full h-full bg-black bg-opacity-40"></div>
+  </div>
+  <header class="bg-black bg-opacity-60 p-4">
+    <h1 class="text-3xl font-bold">🇹🇿 JuaTz: Tanzania Digital Hub</h1>
+    <select id="languageSelector" class="mt-2 p-2 rounded text-black">
+      <option value="sw">Swahili</option>
+      <option value="en">English</option>
+    </select>
+  </header>
+  <main class="p-4 space-y-10 bg-black bg-opacity-40">
+    <section id="news">
+      <h2 class="text-2xl font-bold">📰 Habari Mpya</h2>
+      <div id="newsContent" class="text-sm">Loading news...</div>
+    </section>
+    <section id="jobs">
+      <h2 class="text-2xl font-bold">💼 Fursa za Ajira</h2>
+      <div id="jobsContent" class="text-sm">Loading jobs...</div>
+    </section>
+    <section id="experts">
+      <h2 class="text-2xl font-bold">📚 Wataalamu</h2>
+      <div id="expertsContent" class="text-sm">Loading experts...</div>
+    </section>
+    <section id="art">
+      <h2 class="text-2xl font-bold">🎨 Soko la Sanaa</h2>
+      <iframe src="market.html" class="w-full h-72 rounded shadow-md bg-white"></iframe>
+    </section>
+    <section id="chat">
+      <h2 class="text-2xl font-bold">💬 Gumzo Moja kwa Moja</h2>
+      <iframe src="chat.html" class="w-full h-96 rounded shadow-md bg-white"></iframe>
+    </section>
+    <section id="about" class="bg-white bg-opacity-20 p-4 rounded">
+      <h2 class="text-xl font-bold">Kuhusu JuaTz</h2>
+      <p>JuaTz ni jukwaa la kidijitali lililoundwa na kijana wa Kitanzania mwenye umri wa miaka 23, Stephen, pamoja na rafiki wake wa kiakili Seed. Lengo ni kuunganisha Watanzania na taarifa, sanaa, wataalamu, na fursa halisi kwa kutumia teknolojia ya sasa.</p>
+    </section>
+  </main>
+  <footer class="p-4 text-center text-sm bg-black bg-opacity-60">
+    &copy; 2025 JuaTz | Jamhuri ya Muungano wa Tanzania 🇹🇿
+  </footer>
+  <script>
+    const images = [
+      "https://upload.wikimedia.org/wikipedia/commons/3/38/Flag_of_Tanzania.svg",
+      "https://upload.wikimedia.org/wikipedia/commons/f/f6/Julius_Nyerere_2.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/2/23/Kariakoo_market_Dar_es_Salaam.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/5/5e/Mount_Kilimanjaro.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/a/a4/Zanzibar_Stone_Town.jpg"
+    ];
+    let currentIndex = 0;
+    const slider = document.getElementById("bgSlider");
+    function updateBackground() {
+      slider.style.backgroundImage = `url('${images[currentIndex]}')`;
+      currentIndex = (currentIndex + 1) % images.length;
+    }
+    setInterval(updateBackground, 6000);
+    updateBackground();
+    document.getElementById("languageSelector").addEventListener("change", function() {
+      const lang = this.value;
+      alert("Lugha kubadilishwa hadi: " + (lang === "sw" ? "Kiswahili" : "English (Coming Soon)"));
+    });
+  </script>
+</body>
+</html>

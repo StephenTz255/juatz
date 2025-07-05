@@ -1,34 +1,55 @@
+const SHEETS = {
+  news: '1wYojlcwrcRbodePfm1I6u7yW8gVEnJYydKs5FbKWxuw',
+  jobs: '1gSpsLMmNBployPFYvlrQB2K6cRpP0hvgi7d3jBP6KnY',
+  experts: '1XpsCfd_fv8IPjo2mxttnRYEpHk6UmTPjbvHM6uuqwSQ',
+  towns: '17KjYAvmn6DJlI9JyCzfAyaPVQYqmagIa3Qkpd8aPBBE',
+  art: '1M4vlCbLv7zdSRziEQmEzt2MNhPSjsjCL1dtzN-07Pc8',
+};
 
-// Load data from Google Sheets using OpenSheet API
+async function fetchGoogleSheetData(sheetId) {
+  try {
+    const response = await fetch(`https://opensheet.elk.sh/${sheetId}`);
+    if (!response.ok) throw new Error('Network error');
+    return await response.json();
+  } catch (error) {
+    console.error('Fetch error:', error);
+    return null;
+  }
+}
 
-async function loadSheet(url, containerId, formatter) {
-  const res = await fetch(url);
-  const data = await res.json();
+async function loadSectionData(sheetId, containerId, templateFn) {
+  const data = await fetchGoogleSheetData(sheetId);
   const container = document.getElementById(containerId);
-  container.innerHTML = "";
-  data.forEach(entry => {
-    container.innerHTML += formatter(entry);
-  });
+  if (data && container) {
+    data.forEach(item => {
+      const el = document.createElement('div');
+      el.className = 'bg-white p-4 rounded shadow';
+      el.innerHTML = templateFn(item);
+      container.appendChild(el);
+    });
+  }
 }
 
-function formatNews(item) {
-  return `<div class="mb-2"><h3 class="font-bold">${item.Title}</h3><p>${item.Description}</p></div>`;
+function newsTemplate(item) {
+  return `<h3 class="font-semibold">${item.title}</h3><p>${item.description}</p>`;
+}
+function jobTemplate(item) {
+  return `<h3 class="font-semibold">${item.position}</h3><p>${item.organization}</p>`;
+}
+function expertTemplate(item) {
+  return `<h3 class="font-semibold">${item.name}</h3><p>${item.profession}</p>`;
+}
+function townTemplate(item) {
+  return `<h3 class="font-semibold">${item.town}</h3><p>${item.description}</p>`;
+}
+function artTemplate(item) {
+  return `<h3 class="font-semibold">${item.artist}</h3><p>${item.art_title}</p>`;
 }
 
-function formatJobs(item) {
-  return `<div class="mb-2"><strong>${item.Title}</strong> - ${item.Description} (${item.Deadline})</div>`;
-}
-
-function formatExperts(item) {
-  return `<div class="mb-2"><strong>${item.Name}</strong> - ${item.Profession} (${item.Contact})</div>`;
-}
-
-// URLs to your sheets
-const newsURL = "https://opensheet.elk.sh/1wYojlcwrcRbodePfm1I6u7yW8gVEnJYydKs5FbKWxuw/Sheet1";
-const jobsURL = "https://opensheet.elk.sh/1gSpsLMmNBployPFYvlrQB2K6cRpP0hvgi7d3jBP6KnY/Sheet1";
-const expertsURL = "https://opensheet.elk.sh/1XpsCfd_fv8IPjo2mxttnRYEpHk6UmTPjbvHM6uuqwSQ/Sheet1";
-
-// Load content
-loadSheet(newsURL, "newsContent", formatNews);
-loadSheet(jobsURL, "jobsContent", formatJobs);
-loadSheet(expertsURL, "expertsContent", formatExperts);
+document.addEventListener('DOMContentLoaded', () => {
+  loadSectionData(SHEETS.news, 'news-content', newsTemplate);
+  loadSectionData(SHEETS.jobs, 'job-listings', jobTemplate);
+  loadSectionData(SHEETS.experts, 'experts-list', expertTemplate);
+  loadSectionData(SHEETS.towns, 'towns-list', townTemplate);
+  loadSectionData(SHEETS.art, 'art-listings', artTemplate);
+});

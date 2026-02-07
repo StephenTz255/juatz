@@ -1,2 +1,1 @@
-# juatz
-Public platform for Tanzania - Powered by Youth.
+Juatz is a local-first digital discovery platform designed to help people understand, navigate, and benefit from the economic and social activity around them. Its core purpose is simple: connect individuals to nearby places, opportunities, and community knowledge in a fast, trustworthy, and habit-forming way 
